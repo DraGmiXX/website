@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Блог{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+    <a href="{{ url_for('index') }}" class="logo">Мій блог</a>
+
+    <div class="nav-links">
+        {% for section in sections %}
+            <a href="{{ url_for('section_page', section_slug=section.slug) }}">
+                {{ section.name }}
+            </a>
+        {% else %}
+            <span>Розділів поки немає</span>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('add_post') }}" class="btn-add">➕ Додати пост</a>
+</nav>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

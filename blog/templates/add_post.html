@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Створити пост{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-card">
+        <h2>✨ Новий запис</h2>
+
+        <form action="{{ url_for('add_post') }}" method="POST">
+            <div class="form-group">
+                <label for="section">Оберіть розділ:</label>
+                <select name="section" id="section" required>
+                    {% for section in sections %}
+                        <option value="{{ section.id }}">{{ section.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="text">Ваш текст:</label>
+                <textarea name="text" id="text" rows="5" placeholder="Про що ви думаєте?" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Посилання на картинку:</label>
+                <input type="url" name="image" id="image" placeholder="https://example.com/image.jpg">
+            </div>
+
+            <button type="submit" class="btn-submit">Опублікувати пост</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="{{ url_for('index') }}" style="color: #888; text-decoration: none; font-size: 0.9rem;">← Скасувати</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

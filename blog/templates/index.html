@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Головна{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Вітаю у моєму особистому блозі про спорт!</h1>
+</div>
+
+<div class="recent-section">
+    <h2>Останні публікації</h2>
+    <div class="posts-grid">
+        {% for post in recent_posts %}
+            <div class="post-card">
+                <span class="badge">{{ post.section_name }}</span>
+                <p>{{ post.text[:100] }}{% if post.text|length > 100 %}...{% endif %}</p>
+                {% if post.image %}
+                    <img src="{{ post.image }}" alt="">
+                {% endif %}
+                <div class="card-footer">
+                    <a href="{{ url_for('section_page', section_slug=post.section_slug) }}">Читати далі →</a>
+                </div>
+            </div>
+        {% else %}
+            <p>Постів поки немає.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
